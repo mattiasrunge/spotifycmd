@@ -67,11 +67,15 @@ int main(int argc, char **argv)
 		{
 			std::string title = buffer;
 			
-			std::string::size_type pos1 = title.find('-') + 2;
+			std::string::size_type pos1 = title.find('-');
 			std::string::size_type pos2 = title.find(static_cast<char>(-106));
 			
-			artistName = title.substr(pos1, pos2 - pos1 - 1);
-			songName = title.substr(pos2 + 2);
+			if (pos1 != std::string::npos && pos2 != std::string::npos)
+			{
+				pos1 += 2;
+				artistName = title.substr(pos1, pos2 - pos1 - 1);
+				songName = title.substr(pos2 + 2);
+			}
 		}
 		
 		std::string command = argv[1];
